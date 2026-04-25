@@ -1,0 +1,87 @@
+/* ============================================================
+   index.css — Global base styles for Finova Banking
+   • Imports Tailwind's base / components / utilities layers
+   • Sets CSS custom properties (design tokens) for both themes
+   • Custom scrollbar, transitions, utility classes
+   ============================================================ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CSS Design Tokens ─────────────────────────────────────── */
+:root {
+  /* Light theme defaults */
+  --primary:   #5B6CFF;
+  --secondary: #8B9DFF;
+  --accent:    #22C55E;
+  --bg:        #F5F7FB;
+  --card:      #FFFFFF;
+  --text:      #1E293B;
+  --muted:     #64748B;
+  --border:    #E2E8F0;
+}
+
+.dark {
+  /* Dark theme overrides — applied when <html> has class="dark" */
+  --bg:   #0F172A;
+  --card: #1E293B;
+  --text: #F1F5F9;
+}
+
+/* ── Base Body ─────────────────────────────────────────────── */
+body {
+  font-family: 'Google Sans', 'Product Sans', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Custom Scrollbar ──────────────────────────────────────── */
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #5B6CFF66; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #5B6CFF; }
+
+/* ── Reusable component layer classes ──────────────────────── */
+@layer components {
+  /* Card wrapper */
+  .card {
+    @apply bg-white dark:bg-[#1E293B] rounded-2xl shadow-sm border border-[#E2E8F0] dark:border-[#334155] p-6 transition-all duration-300;
+  }
+
+  /* Primary button */
+  .btn-primary {
+    @apply bg-[#5B6CFF] hover:bg-[#4A5CE8] text-white font-medium px-6 py-3 rounded-xl transition-all duration-200 active:scale-95;
+  }
+
+  /* Outline button */
+  .btn-outline {
+    @apply border-2 border-[#5B6CFF] text-[#5B6CFF] hover:bg-[#5B6CFF] hover:text-white font-medium px-6 py-3 rounded-xl transition-all duration-200;
+  }
+
+  /* Form input */
+  .input-field {
+    @apply w-full bg-[#F5F7FB] dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-[#334155] rounded-xl px-4 py-3 text-[#1E293B] dark:text-[#F1F5F9] placeholder-[#64748B] focus:outline-none focus:ring-2 focus:ring-[#5B6CFF] transition-all duration-200;
+  }
+
+  /* Sidebar link */
+  .sidebar-link {
+    @apply flex items-center gap-3 px-4 py-3 rounded-xl text-[#64748B] dark:text-[#94A3B8] hover:bg-[#5B6CFF1A] hover:text-[#5B6CFF] transition-all duration-200 cursor-pointer;
+  }
+
+  .sidebar-link.active {
+    @apply bg-[#5B6CFF1A] text-[#5B6CFF] font-medium;
+  }
+}
+
+/* ── Page transition ────────────────────────────────────────── */
+.page-enter {
+  animation: fadeIn 0.35s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
